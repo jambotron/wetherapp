@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Info extends Component {
+class CurrentInfo extends Component {
   render () {
     const {location, temp, feelsLike, windspeed, humidity, pressure, weatherDesc, weatherIcon, localtime, error} = this.props,
           pressure_mmHg = Math.round(pressure/1.33322)
@@ -11,8 +11,8 @@ class Info extends Component {
         <div>
           <h3> {location} <br/><span>{localtime}</span> </h3>
           <p> <img src={weatherIcon} alt="weather-icon"/> {weatherDesc} </p>
-          <p> Температура воздуха: {temp}°C </p>
-          <p> По ощущениям: {feelsLike}°C </p>
+          <p> Температура воздуха: {temp}° </p>
+          <p> По ощущениям: {feelsLike}° </p>
           <p> Влажность воздуха: {humidity}% </p>
           <p> Ветер: {windspeed}км/ч </p>
           <p> Давление: {pressure_mmHg}мм.рт.ст. </p>
@@ -24,4 +24,4 @@ class Info extends Component {
   }
 }
 
-export default Info;
+export default CurrentInfo;
