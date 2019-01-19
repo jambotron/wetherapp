@@ -13,10 +13,10 @@ class HourlyInfo extends Component {
      }
 
   render () {
-    const {hourlyData} = this.props;
+    const {hourlyData} = this.props.data;
 
     return (
-      <div>
+      <div className="hourlyinfo__section container">
         {hourlyData === undefined ? '' : <h4>Погода в течении дня</h4>}
         <div className="hourlyInfo">
           {hourlyData === undefined ? '' : hourlyData.map(this.renderHourlyInfoElement)}

@@ -14,10 +14,10 @@ class Forecast extends Component {
        }
 
     render () {
-      const {daysData} = this.props;
+      const {daysData} = this.props.data;
 
       return (
-        <div className="daysInfo">
+        <div className="forecast__section container">
           {daysData === undefined ? '' : <h4>Погода в ближайшие дни</h4>}
           <div className="daysInfo__item">
             {daysData === undefined ? '' : daysData.map(this.renderDayInfoElement)}
