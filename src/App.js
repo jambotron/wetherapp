@@ -12,7 +12,7 @@ class App extends Component {
 
   state = {};
 
-gettingWether = async (e) => {
+getWetherData = async (e) => {
   e.preventDefault();
 
   let cityName = e.target.elements.city.value
@@ -21,10 +21,10 @@ gettingWether = async (e) => {
     const api_url_response = await
     fetch(`https://api.worldweatheronline.com/premium/v1/weather.ashx?key=${WETHER_API_KEY}&lang=ru&q=${cityName}&showlocaltime=yes&mca=no&format=json`);
 
-    const dataJSON = await api_url_response.json();
-    console.log(dataJSON);
+    const { data } = await api_url_response.json();
+    console.log(data);
 
-    if (dataJSON.data.error) {
+    if (data.error) {
       this.setState({
         data: {
           error: "Местоположение не найдено"
@@ -32,17 +32,17 @@ gettingWether = async (e) => {
       });
     } else {this.setState({
         data: {
-          location: dataJSON.data.request[0].query,
-          weatherDesc: dataJSON.data.current_condition[0].lang_ru[0].value,
-          temp: dataJSON.data.current_condition[0].temp_C,
-          feelsLike: dataJSON.data.current_condition[0].FeelsLikeC,
-          humidity: dataJSON.data.current_condition[0].humidity,
-          windspeed: dataJSON.data.current_condition[0].windspeedKmph,
-          pressure: dataJSON.data.current_condition[0].pressure,
-          weatherIcon: dataJSON.data.current_condition[0].weatherIconUrl[0].value,
-          localtime: dataJSON.data.time_zone[0].localtime,
-          hourlyData: dataJSON.data.weather[0].hourly,
-          daysData: dataJSON.data.weather
+          location: data.request[0].query,
+          weatherDesc: data.current_condition[0].lang_ru[0].value,
+          temp: data.current_condition[0].temp_C,
+          feelsLike: data.current_condition[0].FeelsLikeC,
+          humidity: data.current_condition[0].humidity,
+          windspeed: data.current_condition[0].windspeedKmph,
+          pressure: data.current_condition[0].pressure,
+          weatherIcon: data.current_condition[0].weatherIconUrl[0].value,
+          localtime: data.time_zone[0].localtime,
+          hourlyData: data.weather[0].hourly,
+          daysData: data.weather
         }
       });
     }
@@ -55,7 +55,7 @@ gettingWether = async (e) => {
   }
 }
 
-////
+
 getCityName = async () => {
   const ip_api_response = await
   fetch(`http://api.ipstack.com/check?access_key=${IP_API_KEY}&language=ru`);
@@ -66,44 +66,50 @@ getCityName = async () => {
   const api_url_response = await
   fetch(`https://api.worldweatheronline.com/premium/v1/weather.ashx?key=${WETHER_API_KEY}&lang=ru&q=${city}&showlocaltime=yes&mca=no&format=json`);
 
-  const dataJSON = await api_url_response.json();
-  console.log(dataJSON);
+  const { data } = await api_url_response.json();
+  console.log(data);
 
-  return dataJSON;
+  return data;
 }
 
 componentDidMount() {
         this.getCityName()
-        .then(dataJSON => {
+        .then(data => {
           this.setState({
             data: {
-              location: dataJSON.data.request[0].query,
-              weatherDesc: dataJSON.data.current_condition[0].lang_ru[0].value,
-              temp: dataJSON.data.current_condition[0].temp_C,
-              feelsLike: dataJSON.data.current_condition[0].FeelsLikeC,
-              humidity: dataJSON.data.current_condition[0].humidity,
-              windspeed: dataJSON.data.current_condition[0].windspeedKmph,
-              pressure: dataJSON.data.current_condition[0].pressure,
-              weatherIcon: dataJSON.data.current_condition[0].weatherIconUrl[0].value,
-              localtime: dataJSON.data.time_zone[0].localtime,
-              hourlyData: dataJSON.data.weather[0].hourly,
-              daysData: dataJSON.data.weather
+              location: data.request[0].query,
+              weatherDesc: data.current_condition[0].lang_ru[0].value,
+              temp: data.current_condition[0].temp_C,
+              feelsLike: data.current_condition[0].FeelsLikeC,
+              humidity: data.current_condition[0].humidity,
+              windspeed: data.current_condition[0].windspeedKmph,
+              pressure: data.current_condition[0].pressure,
+              weatherIcon: data.current_condition[0].weatherIconUrl[0].value,
+              localtime: data.time_zone[0].localtime,
+              hourlyData: data.weather[0].hourly,
+              daysData: data.weather
             }
           });
         });
     }
-/////
+
 
   render() {
     const {data} = this.state;
 
     if (!data) {
-      return <div>Loading...</div>;
+      return (
+        <div className="d-flex justify-content-center align-items-center spinner">
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      );
     }
     return (
-      <div className="wrapper">
+      <div className="wrapper app">
         <div className="row">
-          <Form gettingWether={this.gettingWether}/>
+          <Form getWetherData={this.getWetherData}/>
           <CurrentInfo data = {this.state.data} />
           <HourlyInfo data = {this.state.data}/>
           <Forecast data = {this.state.data}/>

@@ -1,0 +1,40 @@
+.currentinfo-section {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.currentinfo-main {
+  display: flex;
+  justify-content: center;
+}
+
+.currentinfo-main span {
+  font-size: 40px;
+  margin-left: 10px;
+}
+
+.currentinfo-desc {
+  font-size: 22px;
+  padding: 0;
+  margin: 0;
+}
+
+.update-info {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.additional-info {
+  display: flex;
+  font-size: 14px;
+}
+
+.additional-info :first-child {
+  margin-right: 10px;
+}
+
+.additional-info p {
+  margin: 0;
+}

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import './Forecast.css';
+
+const weekDays = ["Вс.", "Пн.", "Вт.", "Ср.", "Чт.", "Пт.", "Сб."]
 
 class Forecast extends Component {
 
@@ -7,7 +10,7 @@ class Forecast extends Component {
                   weatherIcon = data.hourly[4].weatherIconUrl[0].value;
            return (
              <li key={index}>
-               <p>{date}</p>
+               <p>{`${weekDays[new Date(date).getDay()]} ${new Date(date).getDate()}`}</p>
                <img src={weatherIcon} alt="weatherIcon"/>
                <p>{mintempC}°  {maxtempC}°</p>
              </li>);
