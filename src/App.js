@@ -5,8 +5,7 @@ import Forecast from './components/Forecast';
 import HourlyInfo from './components/HourlyInfo';
 
 
-const WETHER_API_KEY = "47fa2bde9d2c41b385783953191601",
-      IP_API_KEY = "446d64c7cacea793ebf82c1445104d75";
+const WETHER_API_KEY = "47fa2bde9d2c41b385783953191601";
 
 class App extends Component {
 
@@ -22,7 +21,6 @@ getWetherData = async (e) => {
     fetch(`https://api.worldweatheronline.com/premium/v1/weather.ashx?key=${WETHER_API_KEY}&lang=ru&q=${cityName}&showlocaltime=yes&mca=no&format=json`);
 
     const { data } = await api_url_response.json();
-    console.log(data);
 
     if (data.error) {
       this.setState({
@@ -58,16 +56,15 @@ getWetherData = async (e) => {
 
 getCityName = async () => {
   const ip_api_response = await
-  fetch(`http://api.ipstack.com/check?access_key=${IP_API_KEY}&language=ru`);
+  fetch(`https://api.sypexgeo.net/json/`);
 
   const dataIP = await ip_api_response.json(),
-        city = dataIP.city;
+        city = dataIP.city.name_ru;
 
   const api_url_response = await
   fetch(`https://api.worldweatheronline.com/premium/v1/weather.ashx?key=${WETHER_API_KEY}&lang=ru&q=${city}&showlocaltime=yes&mca=no&format=json`);
 
   const { data } = await api_url_response.json();
-  console.log(data);
 
   return data;
 }
@@ -107,8 +104,8 @@ componentDidMount() {
       );
     }
     return (
-      <div className="wrapper app">
-        <div className="row">
+      <div className="app">
+        <div>
           <Form getWetherData={this.getWetherData} />
           <CurrentInfo data = {this.state.data} />
           <HourlyInfo data = {this.state.data} />

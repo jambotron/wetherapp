@@ -12,7 +12,7 @@ class Forecast extends Component {
            return (
              <li key={index}>
                <p>{`${weekDays[new Date(date).getDay()]} ${new Date(date).getDate()}`}</p>
-               <img src={weatherIcon} alt="weatherIcon"/>
+               <img src={weatherIcon} alt="weather-icon"/>
                <p className="daysinfo-temp">{mintempC}°  <span>{maxtempC}°</span></p>
                <p className="daysinfo-description">{weatherDesc}</p>
              </li>);
