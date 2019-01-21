@@ -6,6 +6,9 @@ class CurrentInfo extends Component {
   render () {
     const {location, temp, feelsLike, windspeed, humidity, pressure, weatherDesc, weatherIcon, localtime, error} = this.props.data;
 
+    let hours = new Date(localtime).getHours().toString().padStart(2, "0"),
+        minutes = new Date(localtime).getMinutes().toString().padStart(2, "0");
+
     return (
       <div className="currentinfo-section container">
       { location &&
@@ -16,14 +19,14 @@ class CurrentInfo extends Component {
             <span className="current-temp">{temp}°</span>
           </div>
           <p className="currentinfo-desc"> {weatherDesc} </p>
-          <p className="update-info"> Обновлено в {`${new Date(localtime).getHours()}:${(new Date(localtime).getMinutes()).length < 2 ? '0'+new Date(localtime).getMinutes() : new Date(localtime).getMinutes()}`}</p>
+          <p className="update-info"> Обновлено в {`${hours}:${minutes}`}</p>
           <div className="additional-info">
             <div className="additional-items">
               <p> По ощущениям {feelsLike}° </p>
               <p> Ветер {windspeed}км/ч </p>
             </div>
             <div className="additional-items">
-              <p> Влажность {humidity}% </p>
+              <p> Влажность 🌢 {humidity}% </p>
               <p> Давление {Math.round(pressure/1.33322)}мм </p>
             </div>
           </div>

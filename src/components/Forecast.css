@@ -1,12 +1,34 @@
-.daysInfo__item {
-  margin: 20px 0;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.daysInfo__item li {
+.daysinfo-items li {
   list-style: none;
   text-align: center;
+  margin: 0 5px;
+  width: 85px;
+}
+
+.forecast-section {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.daysinfo-items {
+  margin: 20px 0;
+  display: flex;
+}
+
+.daysinfo-items li p {
+  margin: 0;
+}
+
+.daysinfo-temp {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.daysinfo-temp span {
+  font-weight: 300;
+  font-size: 17px;
+}
+
+.daysinfo-description {
+  font-size: 14px;
 }
