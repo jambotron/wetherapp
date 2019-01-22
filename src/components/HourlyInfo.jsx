@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Slider from 'react-slick';
 import './HourlyInfo.css';
+
 
 const timeLine = {
   0: '00:00',
@@ -11,6 +13,7 @@ const timeLine = {
   1800: '18:00',
   2100: '21:00',
 };
+//
 
 class HourlyInfo extends Component {
 
@@ -19,24 +22,57 @@ class HourlyInfo extends Component {
                 weatherIcon = data.weatherIconUrl[0].value,
                 description = data.lang_ru[0].value;
          return (
-          <li key={index}>
+          <div key={index} className="hourlyinfo-item">
+           <div className="hourlyinfo-content">
              <p>{timeLine[time]}</p>
              <img src={weatherIcon} alt="weatherIcon"/>
              <p className="hourlyinfo-temp">{tempC}°</p>
              <p className="hourlyinfo-description">{description}</p>
-          </li>
+           </div>
+          </div>
        );
      }
 
-  render () {
+  render() {
     const {hourlyData} = this.props.data;
+    const settings = {
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 5,
+      slidesToScroll: 3,
+      swipeToSlide: true,
+      responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 320,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      }
+    ]
+    };
 
     return (
       <div className="hourlyinfo__section">
         {hourlyData === undefined ? '' : <h4>Погода в течении дня</h4>}
-        <div className="hourlyinfo-items">
-          {hourlyData === undefined ? '' : hourlyData.map(this.renderHourlyInfoElement)}
-        </div>
+        <Slider {...settings} >
+            {hourlyData === undefined ? '' : hourlyData.map(this.renderHourlyInfoElement)}
+        </Slider>
       </div>
     );
   }

@@ -84,7 +84,7 @@ componentDidMount() {
               weatherIcon: data.current_condition[0].weatherIconUrl[0].value,
               localtime: data.time_zone[0].localtime,
               hourlyData: data.weather[0].hourly,
-              daysData: data.weather.slice(0, 7)
+              daysData: data.weather
             }
           });
         });
