@@ -26,7 +26,7 @@ class CurrentInfo extends Component {
               <p> Ветер {windspeed}км/ч </p>
             </div>
             <div className="additional-items">
-              <p> Влажность 🌢 {humidity}% </p>
+              <p> Влажность {humidity}% </p>
               <p> Давление {Math.round(pressure/1.33322)}мм </p>
             </div>
           </div>

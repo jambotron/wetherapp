@@ -7,24 +7,34 @@ h4 {
   text-align: center;
 }
 
+.hourlyinfo__section .slick-slide {
+  width: 120px;
+}
+
 .hourlyinfo__section {
-  max-width: 900px;
+  max-width: 700px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.hourlyinfo-content {
+  list-style: none;
+  text-align: center;
+  margin: 5px 0;
+  padding: 5px 0;
+  width: 120px;
+  height: 170px;
+  /* border: 1px solid gray;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.5); */
+}
+
+
+.hourlyinfo-item img {
   margin: 0 auto;
 }
 
-.hourlyinfo-items {
-  margin: 20px 0;
-  display: flex;
-}
-
-.hourlyinfo-items li {
-  list-style: none;
-  text-align: center;
-  margin: 0 5px;
-  width: 85px;
-}
-
-.hourlyinfo-items li p {
+.hourlyinfo-item p {
   margin: 0;
 }
 
